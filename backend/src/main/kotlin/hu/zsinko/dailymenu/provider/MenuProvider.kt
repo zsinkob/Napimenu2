@@ -8,6 +8,14 @@ interface MenuProvider {
 
 fun generateMenu(menu: String, restaurant: Restaurant): Menu = Menu(menu, LocalDate.now(), restaurant)
 
-data class Restaurant(val name: String, val address: String)
+data class Restaurant(
+        val name: String,
+        val address: String
+)
 
-data class Menu(val menu: String, val date: LocalDate, val restaurant: Restaurant)
+data class Menu(
+        val menu: String,
+        val date: LocalDate,
+        val restaurant: Restaurant,
+        val image: String? = null
+)

@@ -24,7 +24,6 @@ class MenuProperties {
     lateinit var facebooktoken: String
 }
 
-
 fun main(args: Array<String>) {
     runApplication<Application>(*args)
 }

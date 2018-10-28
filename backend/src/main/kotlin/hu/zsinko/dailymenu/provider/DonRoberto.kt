@@ -13,7 +13,13 @@ class DonRoberto(private val facebookService: FacebookService): MenuProvider {
     private val dateFormat = DateTimeFormatter.ofPattern("MM.dd.")
 
     override fun getMenu(date: LocalDate): Menu {
-        val post = facebookService.getPost("DonRobertoPizzeria") { Regex(dateFormat.format(date)).containsMatchIn(it) }
-        return generateMenu(post.linesBetween("CLASSIC","menü"), restaurant)
+        val post = facebookService.getPost("DonRobertoPizzeria") {
+            it.message != null &&
+                    Regex(dateFormat.format(date)).containsMatchIn(it.message)
+        }
+
+        val menu = post?.message?.linesBetween("CLASSIC", "menü") ?: ""
+
+        return generateMenu(menu, restaurant)
     }
 }

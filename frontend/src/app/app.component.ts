@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { MenuService } from './menu.service';
+import { ViewEncapsulation } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-root',

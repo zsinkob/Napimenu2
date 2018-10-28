@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +9,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MenuComponent implements OnInit {
   @Input() menu: any;
 
-  constructor() { }
+  constructor(private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+  }
+
+  formatImage(): any {
+      return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
+                   + this.menu.image);
+
   }
 
 }
