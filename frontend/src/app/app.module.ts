@@ -10,7 +10,7 @@ import { MenuService } from './menu.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatToolbarModule} from '@angular/material';
 
 
 @NgModule({
@@ -24,7 +24,9 @@ import {MatButtonModule, MatCardModule} from '@angular/material';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule, MatCardModule
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule
   ],
   providers: [MenuService],
   bootstrap: [AppComponent]

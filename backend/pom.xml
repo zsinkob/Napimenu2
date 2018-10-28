@@ -23,7 +23,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<kotlin.version>1.2.51</kotlin.version>
+		<kotlin.version>1.2.71</kotlin.version>
 		<appengine.sdk.version>1.9.59</appengine.sdk.version>
 		<appengine.app.version>1</appengine.app.version>
 	</properties>
@@ -51,6 +51,14 @@
 			<groupId>javax.cache</groupId>
 			<artifactId>cache-api</artifactId>
 			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -90,11 +98,28 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-stdlib-jdk8</artifactId>
+			<version>${kotlin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-test</artifactId>
+			<version>${kotlin.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.nhaarman</groupId>
+			<artifactId>mockito-kotlin</artifactId>
+			<version>1.6.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
+		<sourceDirectory>src/main/kotlin</sourceDirectory>
+		<testSourceDirectory>src/test/kotlin</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -111,6 +136,23 @@
 			</plugin>
 			<plugin>
 				<artifactId>kotlin-maven-plugin</artifactId>
+				<version>${kotlin.version}</version>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>test-compile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
 				<groupId>org.jetbrains.kotlin</groupId>
 				<configuration>
 					<args>
@@ -119,6 +161,7 @@
 					<compilerPlugins>
 						<plugin>spring</plugin>
 					</compilerPlugins>
+					<jvmTarget>1.8</jvmTarget>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -127,6 +170,17 @@
 						<version>${kotlin.version}</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>static</directory>
+						</resource>
+					</webResources>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

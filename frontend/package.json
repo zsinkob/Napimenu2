@@ -5,7 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --prod --output-path=../backend/src/main/webapp",
+    "start:noreload": "ng serve --proxy-config proxy.conf.json --live-reload false",
+    "build": "ng build --prod --output-path=../backend/static",
     "deploy": "gcloud app deploy --project=napimenu00 server/app.yaml",
     "test": "ng test",
     "lint": "ng lint",
