@@ -1,9 +1,9 @@
 package hu.zsinko.dailymenu.provider
 
 fun String.linesBetween(start: String, end: String, includeStart: Boolean = true): String =
-    Regex("\n").split(this).elementsBetween(start, end, includeStart).joinToString("\n")
+    Regex("\n").split(this).elementsBetween(start, end, includeStart, false).joinToString("\n")
 
-fun List<String>.elementsBetween(start: String, end: String, includeStart: Boolean = true): List<String> {
+fun List<String>.elementsBetween(start: String, end: String, includeStart: Boolean = true, fullIfEmpty: Boolean = false): List<String> {
     var extract = false
     val result = arrayListOf<String>()
     this.filter {!it.trim().isEmpty() }.forEach {
@@ -18,5 +18,11 @@ fun List<String>.elementsBetween(start: String, end: String, includeStart: Boole
             result.add(it)
         }
     }
-    return result
+
+    return if(result.isEmpty() && fullIfEmpty) {
+        this
+    } else {
+        result
+    }
+
 }

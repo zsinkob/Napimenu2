@@ -11,7 +11,7 @@ class River : MenuProvider {
     override fun getMenu(date: LocalDate): Menu {
 
         val menu = Jsoup.connect("http://rivercatering.hu/ETLAP/menuriver.html").get().run {
-            select("tbody tr").map(Element::text).elementsBetween("LEVESEK", "MENÜK").joinToString("\n")
+            select("tbody tr").map(Element::text).elementsBetween("LEVESEK", "KÖRETEK", true, true).joinToString("\n")
         }
         return generateMenu(menu, restaurant)
     }

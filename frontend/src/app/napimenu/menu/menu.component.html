@@ -3,8 +3,7 @@
     <mat-card-title><h4>{{menu.restaurant.name}}</h4></mat-card-title>
   </mat-card-header>
   <mat-card-content>
-
-    <p *ngIf="menu.menu !== ''" style="white-space: pre;">{{menu.menu}}</p>
+    <div *ngIf="menu.menu !== ''" [innerHTML]="formatMenu()"></div>
     <img *ngIf="menu.image" [src]="formatImage()"/>
   </mat-card-content>
 </mat-card>

@@ -17,7 +17,10 @@ export class MenuComponent implements OnInit {
   formatImage(): any {
       return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
                    + this.menu.image);
+  }
 
+  formatMenu(): any {
+    return this._sanitizer.bypassSecurityTrustHtml(this.menu.menu.replace(new RegExp('\n', 'g'), '<br/>'));
   }
 
 }

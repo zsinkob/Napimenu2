@@ -5,12 +5,12 @@ import java.time.LocalDate
 
 
 @Service
-class Nordic(private val facebookService: FacebookService) : MenuProvider {
+class ZsuAnn(private val facebookService: FacebookService) : MenuProvider {
 
-    private val restaurant = Restaurant("Nordic Light", "Irodával szemben")
+    private val restaurant = Restaurant("Zsu Ann", "Messze")
 
     override fun getMenu(date: LocalDate): Menu {
-        val post = facebookService.getPost("804040813067079") { it.picture != null }
+        val post = facebookService.getPost("368151033195185") { it.picture != null }
 
         return if (post != null && post.objectId != null) {
             val photo = facebookService.getPhoto(post.objectId)
