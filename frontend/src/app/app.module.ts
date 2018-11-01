@@ -10,14 +10,16 @@ import { MenuService } from './menu.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatToolbarModule, MatProgressSpinnerModule} from '@angular/material';
+import { FooterComponent } from './napimenu/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MenulistComponent,
-    MenuComponent
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import {MatButtonModule, MatCardModule, MatToolbarModule} from '@angular/materia
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ],
   providers: [MenuService],
   bootstrap: [AppComponent]

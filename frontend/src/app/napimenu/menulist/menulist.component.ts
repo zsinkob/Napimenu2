@@ -8,14 +8,31 @@ import { MenuService } from '../../menu.service';
 })
 export class MenulistComponent implements OnInit {
 
-  dailyMenu: any[];
+  dailyMenu: any[] = [];
+
+  loading = false;
 
   constructor(private menuservice: MenuService) {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.menuservice.getMenu()
-      .subscribe(dailyMenu => this.dailyMenu = dailyMenu);
+      .subscribe(dailyMenu => {
+        this.loading = false;
+        for (let i = 0; i < dailyMenu.length; i += 3) {
+          const chunk = dailyMenu.slice(i, i + 3);
+          this.dailyMenu.push(chunk);
+        }
+      });
+  }
+
+  newRow(index: number) {
+    if (index % 3 === 0) {
+      return 'w3-row-padding';
+    } else {
+      return '';
+    }
   }
 
 }

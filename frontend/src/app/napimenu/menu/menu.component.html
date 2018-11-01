@@ -1,10 +1,10 @@
-<mat-card class="menu-card">
-  <mat-card-header>
-    <mat-card-title><h4>{{menu.restaurant.name}}</h4></mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="w3-third w3-container w3-margin-bottom">
+    <div class="w3-container w3-white">
+        <p><b>{{menu.restaurant.name}}</b></p>
+      <div class="menu-details">
     <div *ngIf="menu.menu !== ''" [innerHTML]="formatMenu()"></div>
-    <img *ngIf="menu.image" [src]="formatImage()"/>
-  </mat-card-content>
-</mat-card>
+    <img *ngIf="menu.image" class="fit-image" [src]="formatImage()"/>
+  </div>
+  </div>
+</div>
 
