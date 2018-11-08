@@ -1,5 +1,7 @@
 package hu.zsinko.dailymenu.provider
 
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
 import org.junit.Test
 import org.springframework.social.facebook.api.impl.FacebookTemplate
 import java.time.LocalDate
@@ -19,5 +21,14 @@ class NordicTest {
         val propertiesStream = NordicTest::class.java!!.classLoader.getResourceAsStream("application.properties")
         prop.load(propertiesStream)
         return prop.getProperty("menu.facebooktoken")
+    }
+
+
+    @Test
+    fun testIlTreno() {
+        IlTreno().getMenu(LocalDate.now())
+
+        println(IlTreno().getMenu(LocalDate.now()))
+
     }
 }

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 @Service
 class DonRoberto(private val facebookService: FacebookService): MenuProvider {
 
-    private val restaurant = Restaurant("Don Roberto", "Robert Károly körút")
+    private val restaurant = Restaurant("Don Roberto", "https://www.facebook.com/DonRobertoPizzeria/")
     private val dateFormat = DateTimeFormatter.ofPattern("MM.dd.")
 
     override fun getMenu(date: LocalDate): Menu {

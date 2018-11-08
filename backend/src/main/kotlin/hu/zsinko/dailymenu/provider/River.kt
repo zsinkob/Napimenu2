@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 @Service
 class River : MenuProvider {
-    private val restaurant = Restaurant("River", "Dózsa")
+    private val restaurant = Restaurant("River", "http://rivercatering.hu/ETLAP/menuriver.html")
     override fun getMenu(date: LocalDate): Menu {
 
         val menu = Jsoup.connect("http://rivercatering.hu/ETLAP/menuriver.html").get().run {
