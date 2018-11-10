@@ -1,11 +1,11 @@
-<div class="w3-third w3-container w3-margin-bottom">
-  <div class="w3-container w3-white">
-    <p><a [href]="menu.restaurant.address"><b>{{menu.restaurant.name}}</b></a>
-      <button class="w3-button w3-white" (click)="saveFavorite()"><i class="fa fa-star w3-margin-right"></i></button>
-    </p>
-    <div class="menu-details">
-      <div *ngIf="menu.menu !== ''" [innerHTML]="formatMenu()"></div>
-      <img *ngIf="menu.image" class="fit-image" [src]="formatImage()" />
+
+    <div class="content">
+        <div class="title">
+          <a [href]="menu.restaurant.address" ><b>{{menu.restaurant.name}}</b></a>
+          <div style="float: right">
+          <button class="w3-button" (click)="saveFavorite()"><i class="fa fa-map-pin w3-margin-right"></i></button>
+        </div>
     </div>
+      <img class="photothumb" *ngIf="menu.image" [src]="formatImage()" />
+      <div class="desc" *ngIf="menu.menu !== ''" [innerHTML]="formatMenu()"></div>
   </div>
-</div>

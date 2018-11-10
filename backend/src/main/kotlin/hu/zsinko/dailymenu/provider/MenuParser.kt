@@ -1,5 +1,7 @@
 package hu.zsinko.dailymenu.provider
 
+import java.time.DayOfWeek
+
 fun String.linesBetween(start: String, end: String): String =
         linesBetween(start, end, true, false)
 
@@ -29,3 +31,12 @@ fun List<String>.elementsBetween(start: String, end: String, includeStart: Boole
     }
 
 }
+
+val hunDays = hashMapOf(DayOfWeek.MONDAY to "Hétfő",
+        DayOfWeek.TUESDAY to "Kedd",
+        DayOfWeek.WEDNESDAY to "Szerda",
+        DayOfWeek.THURSDAY to "Csütörtök",
+        DayOfWeek.FRIDAY to "Péntek",
+        DayOfWeek.SATURDAY to "Szombat",
+        DayOfWeek.SUNDAY to "Vasárnap"
+)

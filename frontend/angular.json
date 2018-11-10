@@ -24,7 +24,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-
+              "src/assets/menu.js"
             ]
           },
           "configurations": {

@@ -17,23 +17,20 @@ export class MenulistComponent implements OnInit {
   constructor(private menuservice: MenuService, private _cd: ChangeDetectorRef) {
   }
 
+
   ngOnInit() {
     this.loading = true;
     this.menuservice.getMenu()
       .subscribe(dailyMenu => {
         this.originalMenu = dailyMenu;
-        this.loading = false;
         this.breakRows();
+        this.loading = false;
       });
   }
 
   breakRows() {
     const sorted = this.sortFavories(this.originalMenu);
-    this.dailyMenu = [];
-    for (let i = 0; i < sorted.length; i += 3) {
-      const chunk = sorted.slice(i, i + 3);
-      this.dailyMenu.push(chunk);
-    }
+    this.dailyMenu = sorted;
     this._cd.markForCheck();
   }
 
@@ -43,30 +40,44 @@ export class MenulistComponent implements OnInit {
     this.breakRows();
   }
 
-  sortFavories(menu: any[]): any[] {
-    const favorites = JSON.parse(localStorage.getItem('favorite-menus'));
-    const result = [];
-    if (!favorites) {
-      return menu;
-    } else {
-      menu.forEach((element) => {
-        if (favorites.indexOf(element.restaurant.name) !== -1) {
-          result.unshift(element);
-        } else {
-          result.push(element);
-        }
-      });
-      return result;
-    }
-
+ /* resizeGridItem(item) {
+    const grid = document.getElementsByClassName('grid')[0];
+    const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+    const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+    const rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
+    item.style.gridRowEnd = 'span ' + rowSpan;
   }
 
-  newRow(index: number) {
-    if (index % 3 === 0) {
-      return 'w3-row-padding';
-    } else {
-      return '';
-    }
+  resizeAllGridItems() {
+    const allItems = document.getElementsByClassName('item');
+    allItems.forEach(item => this.resizeGridItem(item));
+  }*/
+
+
+sortFavories(menu: any[]): any[] {
+  const favorites = JSON.parse(localStorage.getItem('favorite-menus'));
+  const result = [];
+  if (!favorites) {
+    return menu;
+  } else {
+    menu.forEach((element) => {
+      if (favorites.indexOf(element.restaurant.name) !== -1) {
+        result.unshift(element);
+      } else {
+        result.push(element);
+      }
+    });
+    return result;
   }
+
+}
+
+newRow(index: number) {
+  if (index % 3 === 0) {
+    return 'w3-row-padding';
+  } else {
+    return '';
+  }
+}
 
 }

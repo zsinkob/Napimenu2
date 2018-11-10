@@ -15,16 +15,8 @@ class Dzsango(private val facebookService: FacebookService) : MenuProvider {
 
     private val restaurant = Restaurant("Dzsángó", "https://www.facebook.com/Dzs%C3%A1ng%C3%B3-687556554630210/")
 
-    private val days = hashMapOf(DayOfWeek.MONDAY to "Hétfő",
-            DayOfWeek.TUESDAY to "Kedd",
-            DayOfWeek.WEDNESDAY to "Szerda",
-            DayOfWeek.THURSDAY to "Csütörtök",
-            DayOfWeek.FRIDAY to "Péntek",
-            DayOfWeek.SATURDAY to "Szombat"
-    )
-
     override fun getMenu(date: LocalDate): Menu {
-        val day = days[DayOfWeek.from(LocalDate.now())]!!
+        val day = hunDays[DayOfWeek.from(LocalDate.now())]!!
         logger.info("today is $day")
         val post = facebookService.getPost("687556554630210") {
             it.message != null &&

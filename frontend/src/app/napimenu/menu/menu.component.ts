@@ -1,18 +1,20 @@
-import { Component, OnInit, Input, Output,  EventEmitter } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { Component, AfterViewInit, Input, Output,  EventEmitter } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
+declare function resizeAllGridItems(): any;
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements AfterViewInit {
   @Input() menu: any;
   @Output() selected: EventEmitter<any> = new EventEmitter();
 
   constructor(private _sanitizer: DomSanitizer) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    resizeAllGridItems();
   }
 
   formatImage(): any {
