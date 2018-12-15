@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCardModule, MatToolbarModule, MatProgressSpinnerModule} from '@angular/material';
 import { FooterComponent } from './napimenu/footer/footer.component';
-import { NgxMasonryModule } from 'ngx-masonry';
 
 
 @NgModule({
@@ -30,8 +29,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
     MatButtonModule,
     MatCardModule,
     MatToolbarModule,
-    MatProgressSpinnerModule,
-    NgxMasonryModule
+    MatProgressSpinnerModule
   ],
   providers: [MenuService],
   bootstrap: [AppComponent]

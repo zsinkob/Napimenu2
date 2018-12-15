@@ -1,7 +1,6 @@
-import { Component, AfterViewInit, Input, Output,  EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, Input, Output,  EventEmitter, AfterContentInit, AfterViewChecked } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-declare function resizeAllGridItems(): any;
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -14,16 +13,36 @@ export class MenuComponent implements AfterViewInit {
   constructor(private _sanitizer: DomSanitizer) { }
 
   ngAfterViewInit() {
-    resizeAllGridItems();
+    this.resizeAllGridItems();
   }
 
   formatImage(): any {
-    return this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,'
-      + this.menu.image);
+    return 'data:image/jpg;base64,'
+      + this.menu.image;
   }
 
   formatMenu(): any {
     return this._sanitizer.bypassSecurityTrustHtml(this.menu.menu.replace(new RegExp('\n', 'g'), '<br/>'));
+  }
+
+  onResize(event) {
+    this.resizeAllGridItems();
+  }
+
+  resizeGridItem(item) {
+    const grid = document.getElementsByClassName('grid')[0];
+    const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'), 10);
+    const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'), 10);
+    const rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
+    item.style.gridRowEnd = 'span ' + rowSpan;
+  }
+
+  resizeAllGridItems() {
+    console.log('resize');
+    const allItems = document.getElementsByClassName('item');
+    for (let x = 0; x < allItems.length; x++) {
+      this.resizeGridItem(allItems[x]);
+    }
   }
 
   saveFavorite() {

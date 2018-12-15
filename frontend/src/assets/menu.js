@@ -1,4 +1,5 @@
 function resizeGridItem(item){
+
     grid = document.getElementsByClassName("grid")[0];
     rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
     rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
@@ -13,8 +14,5 @@ function resizeGridItem(item){
     }
   }
   
-  window.onload = resizeAllGridItems();
-  window.addEventListener("resize", resizeAllGridItems);
-  window.addEventListener("click", () => {
-    console.log("Global click handler");
-  }, true);
+  //window.onload = resizeAllGridItems();
+  //window.addEventListener("resize", resizeAllGridItems);

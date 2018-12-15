@@ -40,20 +40,6 @@ export class MenulistComponent implements OnInit {
     this.breakRows();
   }
 
- /* resizeGridItem(item) {
-    const grid = document.getElementsByClassName('grid')[0];
-    const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-    const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
-    const rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
-    item.style.gridRowEnd = 'span ' + rowSpan;
-  }
-
-  resizeAllGridItems() {
-    const allItems = document.getElementsByClassName('item');
-    allItems.forEach(item => this.resizeGridItem(item));
-  }*/
-
-
 sortFavories(menu: any[]): any[] {
   const favorites = JSON.parse(localStorage.getItem('favorite-menus'));
   const result = [];

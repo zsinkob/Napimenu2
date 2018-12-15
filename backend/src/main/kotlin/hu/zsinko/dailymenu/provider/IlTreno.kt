@@ -19,7 +19,9 @@ class IlTreno : MenuProvider {
         val days = doc.run {
             select("thead tr th").map(Element::ownText).filter { !it.trim().isEmpty() }
         }
-        return if(days.size >= currentDay.value && days[currentDay.value - 1] == hunDays[currentDay]) {
+        return if(menu.size >= currentDay.value &&
+                days.size >= currentDay.value &&
+                days[currentDay.value - 1] == hunDays[currentDay]) {
             generateMenu(menu[currentDay.value - 1], restaurant)
         } else {
             generateMenu("", restaurant)
