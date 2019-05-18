@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCardModule, MatToolbarModule, MatProgressSpinnerModule} from '@angular/material';
 import { FooterComponent } from './napimenu/footer/footer.component';
+import { DeciderComponent } from './napimenu/decider/decider.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FooterComponent } from './napimenu/footer/footer.component';
     AppComponent,
     MenulistComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    DeciderComponent
   ],
   imports: [
     BrowserModule,

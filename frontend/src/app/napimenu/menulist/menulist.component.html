@@ -1,4 +1,7 @@
 <div class="w3-container w3-section">
+  <app-decider [menuList]="dailyMenu"></app-decider>
+</div>
+<div class="w3-container w3-section">
     <mat-spinner *ngIf="loading"></mat-spinner>
     <div class="grid">
         <div class="item" *ngFor="let menu of dailyMenu; trackBy: trackByName">

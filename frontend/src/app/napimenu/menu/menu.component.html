@@ -1,11 +1,11 @@
-
-    <div class="content" (window:resize)="onResize($event)">
-        <div class="title">
-          <a [href]="menu.restaurant.address" ><b>{{menu.restaurant.name}}</b></a>
-          <div style="float: right">
-          <button class="w3-button" (click)="saveFavorite()"><i class="fa fa-map-pin w3-margin-right"></i></button>
-        </div>
+<div class="content" (window:resize)="onResize($event)">
+  <div class="title">
+    <a [href]="menu.restaurant.address"><b>{{menu.restaurant.name}}</b></a>
+    <div style="float: right">
+      <button class="w3-button" (click)="saveFavorite()"><i class="fa fa-map-pin w3-margin-right"></i></button>
     </div>
-      <img *ngIf="menu.image" class="photothumb" (load)="resizeAllGridItems()" src="{{'data:image/jpg;base64,' + menu.image}}" />
-      <div *ngIf="menu.menu" class="desc" [innerHTML]="formatMenu()"></div>
   </div>
+  <img *ngIf="menu.image" class="photothumb" (load)="resizeAllGridItems()"
+       src="{{'data:image/jpg;base64,' + menu.image}}"/>
+  <div *ngIf="menu.menu" class="desc" [innerHTML]="formatMenu()"></div>
+</div>

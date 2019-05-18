@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MenuService } from '../../menu.service';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {MenuService} from '../../menu.service';
 
 @Component({
   selector: 'app-menulist',
@@ -34,36 +34,38 @@ export class MenulistComponent implements OnInit {
     this._cd.markForCheck();
   }
 
-  trackByName(index: number, menu: any): number { return menu.restaurant.name; }
+  trackByName(index: number, menu: any): number {
+    return menu.restaurant.name;
+  }
 
   redraw(event) {
     this.breakRows();
   }
 
-sortFavories(menu: any[]): any[] {
-  const favorites = JSON.parse(localStorage.getItem('favorite-menus'));
-  const result = [];
-  if (!favorites) {
-    return menu;
-  } else {
-    menu.forEach((element) => {
-      if (favorites.indexOf(element.restaurant.name) !== -1) {
-        result.unshift(element);
-      } else {
-        result.push(element);
-      }
-    });
-    return result;
+  sortFavories(menu: any[]): any[] {
+    const favorites = JSON.parse(localStorage.getItem('favorite-menus'));
+    const result = [];
+    if (!favorites) {
+      return menu;
+    } else {
+      menu.forEach((element) => {
+        if (favorites.indexOf(element.restaurant.name) !== -1) {
+          result.unshift(element);
+        } else {
+          result.push(element);
+        }
+      });
+      return result;
+    }
+
   }
 
-}
-
-newRow(index: number) {
-  if (index % 3 === 0) {
-    return 'w3-row-padding';
-  } else {
-    return '';
+  newRow(index: number) {
+    if (index % 3 === 0) {
+      return 'w3-row-padding';
+    } else {
+      return '';
+    }
   }
-}
 
 }
