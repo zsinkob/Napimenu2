@@ -2,10 +2,12 @@
   <app-decider [menuList]="dailyMenu"></app-decider>
 </div>
 <div class="w3-container w3-section">
-    <mat-spinner *ngIf="loading"></mat-spinner>
-    <div class="grid">
+    <mat-spinner *ngIf="loading==='loading'"></mat-spinner>
+    <div class="alert" *ngIf="loading==='error'">Failed to load menus</div>
+    <div class="grid" *ngIf="loading==='success'">
         <div class="item" *ngFor="let menu of dailyMenu; trackBy: trackByName">
             <app-menu [menu]="menu" style="height: 100%" (selected)="redraw($event)"></app-menu>
         </div>
     </div>
 </div>
+

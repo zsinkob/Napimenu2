@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {MenuService} from '../../menu.service';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { MenuService } from '../../menu.service';
 
 @Component({
   selector: 'app-menulist',
@@ -12,20 +12,22 @@ export class MenulistComponent implements OnInit {
 
   originalMenu: any;
 
-  loading = false;
+  loading = 'idle';
 
   constructor(private menuservice: MenuService, private _cd: ChangeDetectorRef) {
   }
 
+  isError = false;
+
 
   ngOnInit() {
-    this.loading = true;
+    this.loading = 'loading';
     this.menuservice.getMenu()
       .subscribe(dailyMenu => {
         this.originalMenu = dailyMenu;
         this.breakRows();
-        this.loading = false;
-      });
+        this.loading = 'success';
+      }, () => this.loading = 'error');
   }
 
   breakRows() {
@@ -43,21 +45,19 @@ export class MenulistComponent implements OnInit {
   }
 
   sortFavories(menu: any[]): any[] {
-    const favorites = JSON.parse(localStorage.getItem('favorite-menus'));
     const result = [];
-    if (!favorites) {
-      return menu;
-    } else {
-      menu.forEach((element) => {
-        if (favorites.indexOf(element.restaurant.name) !== -1) {
-          result.unshift(element);
-        } else {
-          result.push(element);
-        }
-      });
-      return result;
+    const favorites = [];
+    menu.forEach((element) => {
+      if (this.menuservice.isFavorite(element.restaurant.name)) {
+        favorites.push(element);
+      } else {
+        result.push(element);
+      }
+    });
+    if (favorites.length > 0) {
+      result.unshift(...favorites);
     }
-
+    return result;
   }
 
   newRow(index: number) {

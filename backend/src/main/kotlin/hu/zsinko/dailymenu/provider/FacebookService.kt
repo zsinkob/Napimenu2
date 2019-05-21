@@ -5,9 +5,13 @@ import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import org.springframework.social.facebook.api.FeedOperations
+import org.springframework.social.facebook.api.PagedList
 import org.springframework.social.facebook.api.Post
+import org.springframework.social.facebook.api.StoryAttachment
 import org.springframework.social.facebook.api.impl.FacebookTemplate
 import org.springframework.stereotype.Service
+import java.lang.Exception
 import java.util.*
 
 @Service
@@ -18,9 +22,16 @@ class FacebookService(private val facebook: FacebookTemplate) {
 
     fun getPost(page: String, filter: (post: Post) -> Boolean): Post? {
         logger.info("Getting posts for $page")
-        val feed = facebook.feedOperations().getPosts(page)
+        val feed : PagedList<Post>
+        try {
+             feed = facebook.feedOperations().getPosts(page)
+        } catch (e: Exception) {
+            return null
+        }
+
         logger.info("Received ${feed.size} posts")
         for (post in feed) {
+
             if (filter(post)) {
                 logger.info("Post found")
                 return post
@@ -32,10 +43,14 @@ class FacebookService(private val facebook: FacebookTemplate) {
 
     fun getPhoto(postId: String): String {
         val uri = "${facebook.baseGraphApiUrl}$postId/picture"
-        val exchange = facebook.restTemplate.exchange(uri, HttpMethod.GET, HttpEntity(listOf(HttpHeaders())), ByteArray::class.java)
-        return if (exchange.statusCode == HttpStatus.OK) {
-            String(Base64.getEncoder().encode(exchange.body))
-        } else {
+        return try {
+            val exchange = facebook.restTemplate.exchange(uri, HttpMethod.GET, HttpEntity(listOf(HttpHeaders())), ByteArray::class.java)
+            if (exchange.statusCode == HttpStatus.OK) {
+                String(Base64.getEncoder().encode(exchange.body))
+            } else {
+                ""
+            }
+        } catch (e: Exception) {
             ""
         }
     }

@@ -16,7 +16,11 @@ import java.util.concurrent.TimeUnit
 @PropertySource("classpath:application.properties")
 class Beans {
     @Bean
-    fun facebookTemplate(@Value("\${menu.facebooktoken}") token: String): FacebookTemplate = FacebookTemplate(token)
+    fun facebookTemplate(@Value("\${menu.facebooktoken}") token: String): FacebookTemplate {
+        val facebookTemplate = FacebookTemplate(token)
+        facebookTemplate.setApiVersion("3.2")
+        return facebookTemplate
+    }
 
     @Bean
     fun cacheManager(): CacheManager {

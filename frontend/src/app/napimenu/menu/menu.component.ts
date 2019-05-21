@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, Input, Output,  EventEmitter, AfterContentInit, AfterViewChecked } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MenuService } from '../../menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +11,7 @@ export class MenuComponent implements AfterViewInit {
   @Input() menu: any;
   @Output() selected: EventEmitter<any> = new EventEmitter();
 
-  constructor(private _sanitizer: DomSanitizer) { }
+  constructor(private _sanitizer: DomSanitizer, private menuservice: MenuService) { }
 
   ngAfterViewInit() {
     this.resizeAllGridItems();
@@ -47,19 +48,12 @@ export class MenuComponent implements AfterViewInit {
 
   saveFavorite() {
     const restaurant = this.menu.restaurant.name;
-    const currentFavorites = JSON.parse(localStorage.getItem('favorite-menus'));
-    if (!currentFavorites) {
-      localStorage.setItem('favorite-menus', JSON.stringify([restaurant]));
-    } else {
-      const index = currentFavorites.indexOf(restaurant);
-      if (index > -1) {
-        currentFavorites.splice(index, 1);
-      } else {
-        currentFavorites.push(this.menu.restaurant.name);
-      }
-      localStorage.setItem('favorite-menus', JSON.stringify(currentFavorites));
-    }
+    this.menuservice.saveFavorite(restaurant);
     this.selected.emit(restaurant);
+  }
+
+  isFavorite(): boolean {
+    return this.menuservice.isFavorite(this.menu.restaurant.name);
   }
 
 }
